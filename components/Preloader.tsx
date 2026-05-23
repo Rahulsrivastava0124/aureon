@@ -60,20 +60,20 @@ export default function Preloader() {
       className="fixed inset-0 z-[99999] bg-[#17130F] flex flex-col items-center justify-center pointer-events-none"
     >
       <div ref={textRef} className="flex flex-col items-center gap-6">
-        <div className="text-[var(--champagne)] font-display text-2xl tracking-[0.3em] font-light">
+        <div className="text-white font-display text-2xl tracking-[0.3em] font-light">
           AUREON
         </div>
-        <div className="text-[var(--muted-ink)] font-editorial italic text-lg tracking-wide">
+        <div className="text-white/60 font-editorial italic text-lg tracking-wide">
           Summoning worlds...
         </div>
-        <div className="w-48 h-[1px] bg-white/10 mt-4 relative overflow-hidden">
+        <div className="w-48 h-[1px] bg-white/20 mt-4 relative overflow-hidden">
           <div
             ref={barRef}
-            className="absolute top-0 left-0 h-full bg-[var(--champagne)] transition-all duration-300 ease-out"
+            className="absolute top-0 left-0 h-full bg-white transition-all duration-300 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
-        <div className="text-[var(--stone)] text-xs tracking-[0.2em] mt-2 font-mono">
+        <div className="text-white/50 text-xs tracking-[0.2em] mt-2 font-mono">
           {progress}%
         </div>
       </div>
