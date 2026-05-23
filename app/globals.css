@@ -2,26 +2,252 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── AUREON Design System ─── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F5EFE4;
+  --surface: #FFF8EE;
+  --stone: #D8C3A5;
+  --champagne: #C8A96A;
+  --bronze: #8A6A3E;
+  --ink: #17130F;
+  --muted-ink: #6F6558;
+  --cloud: #FFFFFF;
+  --mist: #EDE3D2;
+
+  /* Spacing Grid – 8px base */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 2.5rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-10: 5rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+  --space-20: 10rem;
+  --space-24: 12rem;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Inter", system-ui, -apple-system, sans-serif;
+  --font-editorial: "Cormorant Garamond", Georgia, serif;
+
+  /* Transitions */
+  --ease-aureon: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-aureon: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 0.3s;
+  --duration-medium: 0.6s;
+  --duration-slow: 1.2s;
+
+  /* Navigation */
+  --nav-height: 56px;
+  --nav-blur: 16px;
+
+  /* Z-index layers */
+  --z-base: 1;
+  --z-content: 10;
+  --z-overlay: 50;
+  --z-nav: 100;
+  --z-modal: 200;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Reset & Base ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--ink);
+  line-height: 1.6;
 }
 
+/* ─── Typography ─── */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-editorial {
+  font-family: var(--font-editorial);
+}
+
+.text-hero {
+  font-size: clamp(4rem, 10vw, 11rem);
+  line-height: 0.85;
+  letter-spacing: -0.07em;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.text-manifesto {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+.text-section-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted-ink);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background-color: var(--champagne);
+  color: var(--cloud);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--stone);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--champagne);
+}
+
+/* ─── Focus States ─── */
+:focus-visible {
+  outline: 2px solid var(--champagne);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ─── Video ─── */
+video {
+  object-fit: cover;
+}
+
+/* ─── Utility Classes ─── */
+.glass-warm {
+  background: rgba(245, 239, 228, 0.65);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+  border: 1px solid rgba(138, 106, 62, 0.18);
+}
+
+.gradient-warm-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(23, 19, 15, 0.08) 0%,
+    rgba(23, 19, 15, 0.0) 30%,
+    rgba(23, 19, 15, 0.0) 70%,
+    rgba(245, 239, 228, 0.6) 100%
+  );
+}
+
+.gradient-hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(23, 19, 15, 0.15) 0%,
+    rgba(23, 19, 15, 0.0) 40%,
+    rgba(138, 106, 62, 0.08) 80%,
+    rgba(245, 239, 228, 0.85) 100%
+  );
+}
+
+.gradient-radial-warm {
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(200, 169, 106, 0.12) 0%,
+    transparent 70%
+  );
+}
+
+/* ─── Atmosphere Particles ─── */
+.atmosphere-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--champagne);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─── Magnetic Button Base ─── */
+.magnetic-area {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Responsive helpers ─── */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .gpu-accelerated {
+    transform: translateZ(0);
   }
 }
